@@ -2,7 +2,7 @@ export const Destinations = [
   {
     id: '1',
     description: 'Chamonix, is a beautiful city, a true asian pearl, with crowded streets.',
-    name: 'Chamonix',
+    name: 'Moscow',
     pictures: [
       {
         src: 'http://picsum.photos/300/200?r=0.0762563005163317',
@@ -13,7 +13,7 @@ export const Destinations = [
   {
     id: '2',
     description: 'Chamonix, is a beautiful city, a true asian pearl, with crowded streets.',
-    name: 'Chamonix',
+    name: 'New York',
     pictures: [
       {
         src: 'http://picsum.photos/300/200?r=0.0762563005163317',

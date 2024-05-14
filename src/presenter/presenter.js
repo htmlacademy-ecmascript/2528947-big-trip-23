@@ -24,7 +24,7 @@ export default class Presenter {
     points.forEach((point) => {
       render(new WayPoint(point, destinations), this.boardContainer);
     });
-    points.forEach((point) => {
+    offers.forEach((point) => {
       render(new EditWayPoints(point, destinations, offers), this.boardContainer, RenderPosition.AFTERBEGIN);
     });
   }

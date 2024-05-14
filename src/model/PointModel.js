@@ -1,6 +1,6 @@
-import { Points } from '../mock/point';
 import { Destinations } from '../mock/MasDestinations';
 import { offers } from '../mock/MasOffer';
+import { Points } from '../mock/MasPoint';
 
 export default class PointModel {
   constructor() {

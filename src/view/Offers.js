@@ -1,4 +1,4 @@
-function Offers() {
+function Offers(offers) {
   return `<section class="event__section  event__section--offers">
 						<h3 class="event__section-title  event__section-title--offers">Offers</h3>
 						<div class="event__available-offers">
@@ -7,7 +7,7 @@ function Offers() {
 								<label class="event__offer-label" for="event-offer-luggage-1">
 									<span class="event__offer-title">Add luggage</span>
 									&plus;&euro;&nbsp;
-									<span class="event__offer-price">30</span>
+									<span class="event__offer-price">${offers.ObjOffers.price}</span>
 								</label>
 							</div>
 

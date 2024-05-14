@@ -1,7 +1,7 @@
 import { createElement } from '../render';
 import filter from './Filter';
+import Offers from './Offers';
 function editWayPoint(offers) {
-	console.log(offers)
   return `<section class="trip-events">
 	<h2 class="visually-hidden">Trip events</h2>
 	${filter()}
@@ -83,7 +83,7 @@ function editWayPoint(offers) {
 					<button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
 					<button class="event__reset-btn" type="reset">Cancel</button>
 				</header>
-				${Offers()}
+				${Offers(offers)}
 			</form>
 		</li>`;
 }

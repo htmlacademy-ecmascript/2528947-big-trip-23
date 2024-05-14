@@ -1,8 +1,7 @@
-
-import { createElement } from '../../render';
-import Offers from './Offers';
+import { createElement } from '../render';
 import filter from './Filter';
-function editWayPoint() {
+function editWayPoint(offers) {
+	console.log(offers)
   return `<section class="trip-events">
 	<h2 class="visually-hidden">Trip events</h2>
 	${filter()}
@@ -91,8 +90,12 @@ function editWayPoint() {
 
 // eslint-disable-next-line camelcase
 export default class EditWayPoints {
+  constructor(offers) {
+    this.offers = offers;
+  }
+
   getTemplate() {
-    return editWayPoint();
+    return editWayPoint(this.offers);
   }
 
   getElement() {

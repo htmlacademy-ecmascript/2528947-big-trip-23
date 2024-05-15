@@ -1,4 +1,4 @@
-import { render, RenderPosition } from '../render.js';
+import { render } from '../render.js';
 import DrawPoint from '../view/DrawPoint.js';
 import EditWayPoints from '../view/EditWayPoint.js';
 import WayPoint from '../view/WayPoint.js';
@@ -21,11 +21,11 @@ export default class Presenter {
     const destinations = this.pointModel.getDestination();
     const offers = this.pointModel.getOffers();
     this.renderBoardComponent();
+    offers.forEach(() => {
+      render(new EditWayPoints(offers, points, destinations), this.boardContainer);
+    });
     points.forEach((point) => {
       render(new WayPoint(point, destinations), this.boardContainer);
-    });
-    offers.forEach((point) => {
-      render(new EditWayPoints(point, destinations, offers), this.boardContainer, RenderPosition.AFTERBEGIN);
     });
   }
 }

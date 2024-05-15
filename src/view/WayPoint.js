@@ -1,10 +1,8 @@
 
 import { createElement } from '../render';
-function wayPoint(point, destinations) {
-  const {type, isFavorite} = point;
-  const currntDestination = destinations.find((destination) => destination.id === point.destination);
-	console.log(point, destinations)
-  const currntPoint = point.find((poi) => destinations.id === poi.destination);
+function wayPoint(points, destinations) {
+  const {type, isFavorite} = points;
+  const currntDestination = destinations.find((destination) => destination.id === points.destination);
   return `<li class="trip-events__item">
 	<div class="event">
 		<time class="event__date" datetime="2019-03-18">MAR 18</time>
@@ -31,7 +29,7 @@ function wayPoint(point, destinations) {
 			<p class="event__duration">01H 10M</p>
 		</div>
 		<p class="event__price">
-			&euro;&nbsp;<span class="event__price-value">${currntPoint.basePrice}</span>
+			&euro;&nbsp;<span class="event__price-value"></span>
 		</p>
 		<h4 class="visually-hidden">Offers:</h4>
 		<ul class="event__selected-offers">

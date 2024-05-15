@@ -3,9 +3,24 @@ export const offers = [
     type: 'taxi',
     ObjOffers: [
       {
-        id: 'b4c3e4e6-9053-42ce-b747-e281314baa31',
-        title: 'Upgrade to a business class',
+        id: '1',
+        title: 'VIP Place',
         price: 30
+      },
+      {
+        id: '1',
+        title: 'Taxi to the hotel',
+        price: 40
+      },
+      {
+        id: '1',
+        title: 'Breakfast at the hotel',
+        price: 120
+      },
+      {
+        id: '1',
+        title: 'two beds in the room',
+        price: 20
       },
     ]
   },
@@ -13,8 +28,8 @@ export const offers = [
     type: 'train',
     ObjOffers: [
       {
-        id: 'b4c3e4e6-9053-42ce-b747-e281314baa31',
-        title: 'Upgrade to a business class',
+        id: '2',
+        title: 'Taxi to the hotel',
         price: 100
       }
     ]
@@ -23,10 +38,60 @@ export const offers = [
     type: 'bus',
     ObjOffers: [
       {
-        id: 'b4c3e4e6-9053-42ce-b747-e281314baa31',
+        id: '3',
         title: 'Upgrade to a business class',
         price: 50
       }
     ]
-  }
+  },
+  {
+    type: 'bus',
+    ObjOffers: [
+      {
+        id: '3',
+        title: 'Upgrade to a business class',
+        price: 50
+      }
+    ]
+  },
+  {
+    type: 'bus',
+    ObjOffers: [
+      {
+        id: '3',
+        title: 'Upgrade to a business class',
+        price: 50
+      }
+    ]
+  },
+  {
+    type: 'bus',
+    ObjOffers: [
+      {
+        id: '3',
+        title: 'Upgrade to a business class',
+        price: 50
+      }
+    ]
+  },
+  {
+    type: 'bus',
+    ObjOffers: [
+      {
+        id: '3',
+        title: 'Upgrade to a business class',
+        price: 50
+      }
+    ]
+  },
+  {
+    type: 'bus',
+    ObjOffers: [
+      {
+        id: '3',
+        title: 'Upgrade to a business class',
+        price: 50
+      }
+    ]
+  },
 ];

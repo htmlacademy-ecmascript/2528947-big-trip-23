@@ -1,6 +1,6 @@
 export const Points = [
   {
-    id: 'f4b62099-293f-4c3d-a702-94eec4a2808c',
+    id: '1',
     basePrice: '10',
     dateFrom: '2019-07-10T22:55:56.845Z',
     dateTo: '2019-07-11T11:22:13.375Z',
@@ -12,7 +12,7 @@ export const Points = [
     type: 'taxi'
   },
   {
-    id: 'f4b62099-293f-4c3d-a702-94eec4a2808d',
+    id: '2',
     basePrice: '250',
     dateFrom: '2019-07-10T22:55:56.845Z',
     dateTo: '2019-07-11T11:22:13.375Z',
@@ -24,7 +24,7 @@ export const Points = [
     type: 'drive'
   },
   {
-    id: 'f4b62099-293f-4c3d-a702-94eec4a2808f',
+    id: '3',
     basePrice: '250',
     dateFrom: '2019-07-10T22:55:56.845Z',
     dateTo: '2019-07-11T11:22:13.375Z',

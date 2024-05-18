@@ -21,9 +21,9 @@ export default class Presenter {
     const destinations = this.pointModel.getDestination();
     const offers = this.pointModel.getOffers();
     this.renderBoardComponent();
-    offers.forEach(() => {
-      render(new EditWayPoints(offers, points, destinations), this.boardContainer);
-    });
+    this.renderFilter();
+    render(new EditWayPoints(getDefoltPoint(), destinations, points[1]), this.boardContainer);
+    render(new EditWayPoints(offers, destinations, points[1]), this.boardContainer);
     points.forEach((point) => {
       render(new WayPoint(point, destinations), this.boardContainer);
     });

@@ -21,7 +21,7 @@ export const Points = [
     offers: [
       'b4c3e4e6-9053-42ce-b747-e281314baa32'
     ],
-    type: 'drive'
+    type: 'bus'
   },
   {
     id: '3',

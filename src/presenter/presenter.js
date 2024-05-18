@@ -2,6 +2,7 @@ import { render } from '../render.js';
 import DrawPoint from '../view/DrawPoint.js';
 import EditWayPoints from '../view/EditWayPoint.js';
 import WayPoint from '../view/WayPoint.js';
+import { getDefoltPoint } from '../../const.js';
 
 export default class Presenter {
   boardComponent = new DrawPoint();

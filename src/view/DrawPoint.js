@@ -1,23 +1,11 @@
-import {createElement} from '../render.js';
+import AbstractView from '../framework/view/abstract-view';
 
 function createDrawPoint() {
   return '<section class="DrawPoint"></section>';
 }
 
-export default class DrawPoint {
-  getTemplate() {
+export default class DrawPoint extends AbstractView {
+  get template() {
     return createDrawPoint();
-  }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
   }
 }

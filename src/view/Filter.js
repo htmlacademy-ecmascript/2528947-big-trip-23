@@ -1,4 +1,4 @@
-import { createElement } from '../render';
+import AbstractView from '../framework/view/abstract-view';
 const masFilter = ['day', 'event', 'time', 'price', 'offer'];
 
 const createFilter = (props) =>
@@ -12,22 +12,8 @@ function filter() {
 	 ${MapCreateFilter}
 </form>`;
 }
-export default class Filter {
-
-  getTemplate() {
+export default class Filter extends AbstractView {
+  get template() {
     return filter(this.offers, this.destinations, this.point);
   }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
-  }
 }
-

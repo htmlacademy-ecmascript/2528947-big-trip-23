@@ -1,4 +1,4 @@
-import { createElement } from '../render';
+import AbstractView from '../framework/view/abstract-view';
 import ClassOffers from './Offers';
 const CreateBoxPoint = (des) => `<option value=${des.name}></option>`;
 const CreateEventTypeList = (offer) =>
@@ -42,7 +42,7 @@ function editWayPoint(offers, destinations, point) {
 					<button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
 					<button class="event__reset-btn" type="reset">${point.id ? 'Delete' : 'Cansel'}</button>
 				</header>
-				${new ClassOffers(offers, point).getTemplate()}
+				${new ClassOffers(offers, point)}
 				<section class="event__details">
                   <section class="event__section  event__section--destination">
                     <h3 class="event__section-title  event__section-title--destination">Destination</h3>
@@ -56,28 +56,15 @@ function editWayPoint(offers, destinations, point) {
 			</form>
 		</li>`;
 }
-
-// eslint-disable-next-line camelcase
-export default class EditWayPoints {
+export default class EditWayPoints extends AbstractView {
   constructor(offers, destinations, point) {
+    super();
     this.offers = offers;
     this.destinations = destinations;
     this.point = point;
   }
 
-  getTemplate() {
-    return editWayPoint(this.offers, this.destinations, this.point);
-  }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
+  get template() {
+    return editWayPoint(this.point, this.destinations, this.offers);
   }
 }

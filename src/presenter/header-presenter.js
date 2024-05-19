@@ -1,5 +1,5 @@
 import Header from '../view/Header';
-import { render } from '../render';
+import { render } from '../framework/render';
 export default class HeaderPresenter {
   constructor({boardContainer}) {
     this.boardContainer = boardContainer;

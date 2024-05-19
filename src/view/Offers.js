@@ -1,4 +1,4 @@
-import { createElement } from '../render';
+import AbstractView from '../framework/view/abstract-view';
 const CreateOffers = (offer) =>
   `<div class="event__offer-selector">
 	<input class="event__offer-checkbox  visually-hidden" id="event-offer-luggage-1" type="checkbox" name="event-offer-luggage" checked>
@@ -18,25 +18,14 @@ function funOffers(offers, point) {
 						</div>
 					</section>`;
 }
-export default class ClassOffers {
+export default class ClassOffers extends AbstractView {
   constructor(offers, points) {
+    super();
     this.offers = offers;
     this.points = points;
   }
 
-  getTemplate() {
+  get template() {
     return funOffers(this.offers, this.points);
-  }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
   }
 }

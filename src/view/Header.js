@@ -1,4 +1,4 @@
-import { createElement } from '../render';
+import AbstractView from '../framework/view/abstract-view';
 const masHeader = ['Everything', 'Future', 'Present', 'Past'];
 
 const createHeader = (props) =>
@@ -19,20 +19,8 @@ function header() {
 </div>`;
 }
 
-export default class Header {
-  getTemplate() {
+export default class Header extends AbstractView {
+  get template() {
     return header();
-  }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
   }
 }

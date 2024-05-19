@@ -1,5 +1,4 @@
-
-import { createElement } from '../render';
+import AbstractView from '../framework/view/abstract-view';
 function wayPoint(points, destinations) {
   const {type, isFavorite} = points;
   const currntDestination = destinations.find((destination) => destination.id === points.destination);
@@ -64,25 +63,14 @@ function wayPoint(points, destinations) {
 	</li>`;
 }
 
-export default class WayPoint {
+export default class WayPoint extends AbstractView {
   constructor(point, destination) {
+    super();
     this.point = point;
     this.destination = destination;
   }
 
-  getTemplate() {
-    return wayPoint(this.point, this.destination);
-  }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
+  get template() {
+    return wayPoint();
   }
 }

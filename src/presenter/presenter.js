@@ -1,23 +1,37 @@
+import { render } from '../render.js';
+import DrawPoint from '../view/DrawPoint.js';
 import EditWayPoints from '../view/EditWayPoint.js';
 import WayPoint from '../view/WayPoint.js';
-import { render, RenderPosition} from '../../render.js';
+import Filter from '../view/Filter.js';
+import { getDefoltPoint } from '../const.js';
 
 export default class Presenter {
-
-  constructor() {
-    this.tripEvents = document.querySelector('.trip-events');
+  boardComponent = new DrawPoint();
+  constructor({boardContainer, pointModel}) {
+    this.boardContainer = boardContainer;
+    this.pointModel = pointModel;
+    // this.destination = destination;
   }
 
-  renderWayPoint () {
-    render(new WayPoint(), this.tripEvents, RenderPosition.AFTERBEGIN);
+  renderBoardComponent () {
+    render(this.boardComponent, this.boardContainer);
   }
 
-  renderEditWayPoints () {
-    render(new EditWayPoints(), this.tripEvents, RenderPosition.AFTERBEGIN);
+  renderFilter () {
+    render(new Filter(), this.boardContainer);
   }
 
   init() {
-    this.renderWayPoint();
-    this.renderEditWayPoints();
+    const points = this.pointModel.getPoints();
+    const destinations = this.pointModel.getDestination();
+    const offers = this.pointModel.getOffers();
+    this.renderBoardComponent();
+    this.renderFilter();
+    render(new EditWayPoints(offers, destinations, points[1]), this.boardContainer);
+    render(new EditWayPoints(getDefoltPoint(), destinations, points[1]), this.boardContainer);
+    points.forEach((point) => {
+      render(new WayPoint(point, destinations), this.boardContainer);
+    });
   }
 }
+

@@ -1,8 +1,8 @@
 import { render } from '../framework/render.js';
-import DrawPoint from '../view/DrawPoint.js';
-import EditWayPoints from '../view/EditWayPoint.js';
-import WayPoint from '../view/WayPoint.js';
-import Filter from '../view/Filter.js';
+import DrawPoint from '../view/draw_point.js';
+import EditWayPoints from '../view/edit_way_point.js';
+import WayPoint from '../view/way_point.js';
+import Filter from '../view/filter.js';
 import { getDefoltPoint } from '../../const.js';
 
 export default class Presenter {

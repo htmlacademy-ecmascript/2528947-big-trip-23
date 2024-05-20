@@ -7,7 +7,6 @@ const CreateEventTypeList = (offer) =>
 <label class="event__type-label  event__type-label--${offer.type}" for="event-type-${offer.type}-1">${offer.type}</label>
 </div>`;
 function editWayPoint(offers, destinations, point) {
-	console.log(offers)
   const {description, pictures} = destinations[1];
   const MapEventTypeList = offers.map((offer)=> CreateEventTypeList(offer)).join('');
   const BoxPoint = destinations.map((des)=> CreateBoxPoint(des)).join('');
@@ -58,18 +57,15 @@ function editWayPoint(offers, destinations, point) {
 		</li>`;
 }
 export default class EditWayPoints extends AbstractView {
-  #offers = null;
-  #destinations = null;
-  #point = null;
   constructor(offers, destinations, point) {
     super();
-    this.#offers = offers;
-    this.#destinations = destinations;
-    this.#point = point;
+    this.offers = offers;
+    this.destinations = destinations;
+    this.point = point;
 
   }
 
   get template() {
-    return editWayPoint(this.#point, this.#destinations, this.#offers);
+    return editWayPoint(this.offers, this.destinations, this.point);
   }
 }

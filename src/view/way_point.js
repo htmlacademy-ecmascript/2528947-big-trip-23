@@ -1,7 +1,7 @@
 import AbstractView from '../framework/view/abstract-view';
-function wayPoint(points, destinations) {
-  const {type, isFavorite} = points;
-  const currntDestination = destinations.find((destination) => destination.id === points.destination);
+function wayPoint(point, destinations) {
+  const {type, isFavorite} = point;
+  const currntDestination = destinations.find((destination) => destination.id === point.destination);
   return `<li class="trip-events__item">
 	<div class="event">
 		<time class="event__date" datetime="2019-03-18">MAR 18</time>
@@ -71,6 +71,6 @@ export default class WayPoint extends AbstractView {
   }
 
   get template() {
-    return wayPoint();
+    return wayPoint(this.point, this.destination);
   }
 }

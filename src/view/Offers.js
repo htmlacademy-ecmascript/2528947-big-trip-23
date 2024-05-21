@@ -14,13 +14,15 @@ function funOffers(offers, point) {
             </div>`).join('')}`;
 }
 export default class ClassOffers extends AbstractView {
+  #offers = null;
+  #point = null;
   constructor(offers, point) {
     super();
-    this.offers = offers;
-    this.point = point;
+    this.#offers = offers;
+    this.#point = point;
   }
 
   get template() {
-    return funOffers(this.offers, this.point);
+    return funOffers(this.#offers, this.#point);
   }
 }

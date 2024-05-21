@@ -14,6 +14,6 @@ function filter() {
 }
 export default class Filter extends AbstractView {
   get template() {
-    return filter(this.offers, this.destinations, this.point);
+    return filter();
   }
 }

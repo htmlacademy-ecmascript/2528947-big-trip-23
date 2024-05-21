@@ -5,11 +5,11 @@ export default class HeaderPresenter {
     this.boardContainer = boardContainer;
   }
 
-  renderHeader () {
+  #renderHeader () {
     render(new Header(), this.boardContainer);
   }
 
   init() {
-    this.renderHeader();
+    this.#renderHeader();
   }
 }

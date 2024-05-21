@@ -64,13 +64,15 @@ function wayPoint(point, destinations) {
 }
 
 export default class WayPoint extends AbstractView {
+  #destination = null;
+  #point = null;
   constructor(point, destination) {
     super();
-    this.point = point;
-    this.destination = destination;
+    this.#point = point;
+    this.#destination = destination;
   }
 
   get template() {
-    return wayPoint(this.point, this.destination);
+    return wayPoint(this.#point, this.#destination);
   }
 }

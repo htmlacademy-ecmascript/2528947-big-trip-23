@@ -42,7 +42,7 @@ function editWayPoint(offers, destinations, point) {
 					<button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
 					<button class="event__reset-btn" type="reset">${point.id ? 'Delete' : 'Cansel'}</button>
 				</header>
-				${new ClassOffers(offers, point)}
+				${new ClassOffers(offers, point).template}
 				<section class="event__details">
                   <section class="event__section  event__section--destination">
                     <h3 class="event__section-title  event__section-title--destination">Destination</h3>
@@ -57,15 +57,18 @@ function editWayPoint(offers, destinations, point) {
 		</li>`;
 }
 export default class EditWayPoints extends AbstractView {
+  #offers = null;
+  #destinations = null;
+  #point = null;
   constructor(offers, destinations, point) {
     super();
-    this.offers = offers;
-    this.destinations = destinations;
-    this.point = point;
+    this.#offers = offers;
+    this.#destinations = destinations;
+    this.#point = point;
 
   }
 
   get template() {
-    return editWayPoint(this.offers, this.destinations, this.point);
+    return editWayPoint(this.#offers, this.#destinations, this.#point);
   }
 }

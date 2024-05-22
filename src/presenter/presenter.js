@@ -1,38 +1,70 @@
-import { render } from '../framework/render.js';
+import { render, replace } from '../framework/render.js';
 import DrawPoint from '../view/draw_point.js';
 import EditWayPoints from '../view/edit_way_point.js';
-import WayPoint from '../view/way_point.js';
 import Filter from '../view/filter.js';
-import { getDefoltPoint } from '../../const.js';
-
+import WayPoint from '../view/way_point.js';
 export default class Presenter {
   boardComponent = new DrawPoint();
-  #boardContainer = null;
-  #pointModel = null;
-  constructor({boardContainer, pointModel}) {
-    this.#boardContainer = boardContainer;
-    this.#pointModel = pointModel;
-  }
-
-  #renderBoardComponent () {
-    render(this.boardComponent, this.#boardContainer);
-  }
-
-  #renderFilter () {
-    render(new Filter(), this.#boardContainer);
+  constructor({container, pointModel}) {
+    this.container = container;
+    this.pointModel = pointModel;
   }
 
   init() {
-    const points = this.#pointModel.getPoints();
-    const destinations = this.#pointModel.getDestination();
-    const offers = this.#pointModel.getOffers();
     this.#renderBoardComponent();
     this.#renderFilter();
-    render(new EditWayPoints(offers, destinations, points[1]), this.#boardContainer);
-    render(new EditWayPoints(getDefoltPoint(), destinations, points[1]), this.#boardContainer);
-    points.forEach((point) => {
-      render(new WayPoint(point, destinations), this.#boardContainer);
+    this.#renderEvents();
+  }
+
+  #renderBoardComponent() {
+    render(this.boardComponent, this.container);
+  }
+
+  #renderFilter() {
+    render(new Filter(), this.container);
+  }
+
+  #renderEvents() {
+    const offers = this.pointModel.getOffers();
+    offers.forEach((offer) => this.#renderEvent(offer, offers));
+  }
+
+  #renderEvent(offer, offers) {
+    const point = this.pointModel.getPoints();
+    const destination = this.pointModel.getDestination();
+    const onEsc = (evt) => {
+      if (evt.key === 'Escape') {
+        evt.preventDefault();
+        swithToViewMode();
+      }
+    };
+    const OnEditClick = () => swithToEditMode();
+    const OnFormSubmit = () => swithToViewMode();
+    const eventView = new WayPoint({
+      point,
+      destination,
+      OnEditClick: OnEditClick,
     });
+    const eventEditView = new EditWayPoints({
+      offer,
+      offers,
+      destination,
+      OnFormSubmit: OnFormSubmit,
+      OnFormCansel: OnFormSubmit,
+    });
+
+    function swithToEditMode() {
+      replace(eventView, eventEditView);
+      document.addEventListener('keydown', onEsc);
+    }
+
+    function swithToViewMode() {
+      replace(eventEditView, eventView);
+      document.removeEventListener('keydown', onEsc);
+    }
+
+    render(eventView, this.container);
   }
 }
+
 

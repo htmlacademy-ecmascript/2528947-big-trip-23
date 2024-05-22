@@ -1,7 +1,6 @@
 import AbstractView from '../framework/view/abstract-view';
 function wayPoint(point, destinations) {
   const {type, isFavorite} = point;
-  const currntDestination = destinations.find((destination) => destination.id === point.destination);
   return `<li class="trip-events__item">
 	<div class="event">
 		<time class="event__date" datetime="2019-03-18">MAR 18</time>
@@ -14,7 +13,7 @@ function wayPoint(point, destinations) {
 				alt="Event type icon"
 			/>
 		</div>
-		<h3 class="event__title">${type} ${currntDestination.name}</h3>
+		<h3 class="event__title">${type} ${destinations[1].name}</h3>
 		<div class="event__schedule">
 			<p class="event__time">
 				<time class="event__start-time" datetime="2019-03-18T12:25"
@@ -66,13 +65,23 @@ function wayPoint(point, destinations) {
 export default class WayPoint extends AbstractView {
   #destination = null;
   #point = null;
-  constructor(point, destination) {
+  #ButClick = null;
+  #Button = null;
+  constructor({point, destination, OnEditClick}) {
     super();
     this.#point = point;
     this.#destination = destination;
+    this.#ButClick = OnEditClick;
+    this.#Button = this.element.querySelector('.event__rollup-btn');
+    this.#Button.addEventListener('click', this.#onClick);
   }
 
   get template() {
     return wayPoint(this.#point, this.#destination);
   }
+
+  #onClick = (evt) => {
+    evt.preventDefault();
+    this.#ButClick();
+  };
 }

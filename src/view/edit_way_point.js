@@ -6,10 +6,10 @@ const CreateEventTypeList = (offer) =>
 <input id="event-type-${offer.type}-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value=${offer.type}>
 <label class="event__type-label  event__type-label--${offer.type}" for="event-type-${offer.type}-1">${offer.type}</label>
 </div>`;
-function editWayPoint(offers, destinations, point) {
-  const {description, pictures} = destinations[1];
+function editWayPoint(offers, destination, point) {
+  const {description, pictures} = destination;
   const MapEventTypeList = offers.map((offer)=> CreateEventTypeList(offer)).join('');
-  const BoxPoint = destinations.map((des)=> CreateBoxPoint(des)).join('');
+  const BoxPoint = destination.map((des)=> CreateBoxPoint(des)).join('');
   return `<section class="trip-events">
 	<h2 class="visually-hidden">Trip events</h2>
 			<form class="event event--edit" action="#" method="post">
@@ -58,17 +58,17 @@ function editWayPoint(offers, destinations, point) {
 }
 export default class EditWayPoints extends AbstractView {
   #offers = null;
-  #destinations = null;
+  #destination = null;
   #point = null;
-  constructor(offers, destinations, point) {
+  constructor(offers, destination, point) {
     super();
     this.#offers = offers;
-    this.#destinations = destinations;
+    this.#destination = destination;
     this.#point = point;
 
   }
 
   get template() {
-    return editWayPoint(this.#offers, this.#destinations, this.#point);
+    return editWayPoint(this.#offers, this.#destination, this.#point);
   }
 }

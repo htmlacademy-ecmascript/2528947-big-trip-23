@@ -45,13 +45,13 @@ export default class Presenter {
       destination,
       OnEditClick: OnEditClick,
     });
-    const eventEditView = new EditWayPoints({
-      offer,
+    const eventEditView = new EditWayPoints(
       offers,
       destination,
-      OnFormSubmit: OnFormSubmit,
-      OnFormCansel: OnFormSubmit,
-    });
+      point,
+      {OnFormSubmit: OnFormSubmit,
+        OnFormCansel: OnFormSubmit,
+      });
 
     function swithToEditMode() {
       replace(eventView, eventEditView);

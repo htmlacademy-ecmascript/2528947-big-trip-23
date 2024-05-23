@@ -13,7 +13,8 @@ export default class Presenter {
   init() {
     this.#renderBoardComponent();
     this.#renderFilter();
-    this.#renderEvents();
+    const offers = this.pointModel.getOffers();
+    this.#renderEvents(offers);
   }
 
   #renderBoardComponent() {
@@ -24,28 +25,28 @@ export default class Presenter {
     render(new Filter(), this.container);
   }
 
-  #renderEvents() {
-    const offers = this.pointModel.getOffers();
-    offers.forEach((offer) => this.#renderEvent(offer));
+  #renderEvents(offers) {
+    offers.forEach((offer) => this.#renderEvent(offer, offers));
   }
 
-  #renderEvent() {
+  #renderEvent(offer, offers) {
     const point = this.pointModel.getPoints();
-    const offers = this.pointModel.getOffers();
     const destination = this.pointModel.getDestination();
     const onEsc = (evt) => {
       if (evt.key === 'Escape') {
         evt.preventDefault();
-        swithToViewMode();
+        switchToViewMode();
       }
     };
     const OnEditClick = () => swithToEditMode();
-    const OnFormSubmit = () => swithToViewMode();
+    const OnFormSubmit = () => switchToViewMode();
     const eventView = new WayPoint(
-      point[0],
+      point,
       destination,
+      offer,
       offers,
-      {OnEditClick: OnEditClick,
+      {
+        OnEditClick: OnEditClick,
       });
     const eventEditView = new EditWayPoints(
       destination,
@@ -59,7 +60,7 @@ export default class Presenter {
       document.addEventListener('keydown', onEsc);
     }
 
-    function swithToViewMode() {
+    function switchToViewMode() {
       replace(eventEditView, eventView);
       document.removeEventListener('keydown', onEsc);
     }

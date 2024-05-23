@@ -1,7 +1,12 @@
 import AbstractView from '../framework/view/abstract-view';
-function wayPoint(point, destination, offers) {
-  const {type, isFavorite} = point;
-  const currentDestination = destination.find((des) => des.id === offers.ObjOffers.id);
+import normalDate from '../utils';
+function wayPoint(point, destination, offer, offers) {
+  const {isFavorite} = point;
+  const currentDestination = destination.find((des) => des.id === offer.ObjOffers[0].id);
+  const currentPoint = point.find((poi) => poi.type === offer.type);
+  const currentOffers = offers.find((off) => off.type === currentPoint.type);
+  const startDate = normalDate(currentPoint.dateFrom);
+  const endDate = normalDate(currentPoint.dateTo);
   return `<li class="trip-events__item">
 	<div class="event">
 		<time class="event__date" datetime="2019-03-18">MAR 18</time>
@@ -10,38 +15,33 @@ function wayPoint(point, destination, offers) {
 				class="event__type-icon"
 				width="42"
 				height="42"
-				src="img/icons/${type}.png"
+				src="img/icons/${currentOffers.type}.png"
 				alt="Event type icon"
 			/>
 		</div>
-		<h3 class="event__title">${type} ${currentDestination}</h3>
+		<h3 class="event__title">${currentOffers.type} ${currentDestination.name}</h3>
 		<div class="event__schedule">
 			<p class="event__time">
-				<time class="event__start-time" datetime="2019-03-18T12:25"
-					>12:25</time
+				<time class="event__start-time" datetime='${startDate}'
+					>${startDate}</time
 				>
 				&mdash;
 				<time class="event__end-time" datetime="2019-03-18T13:35"
-					>13:35</time
+					>${endDate}</time
 				>
 			</p>
 			<p class="event__duration">01H 10M</p>
 		</div>
 		<p class="event__price">
-			&euro;&nbsp;<span class="event__price-value">${currentDestination}</span>
+			&euro;&nbsp;<span class="event__price-value">${currentPoint.basePrice}</span>
 		</p>
 		<h4 class="visually-hidden">Offers:</h4>
 		<ul class="event__selected-offers">
-			<li class="event__offer">
-				<span class="event__offer-title">Add luggage</span>
-				&plus;&euro;&nbsp;
-				<span class="event__offer-price">50</span>
-			</li>
-			<li class="event__offer">
-				<span class="event__offer-title">Switch to comfort</span>
-				&plus;&euro;&nbsp;
-				<span class="event__offer-price">80</span>
-			</li>
+	<li class="event__offer">
+	<span class="event__offer-title">${currentOffers.ObjOffers[0].title}</span>
+	&plus;&euro;&nbsp;
+	<span class="event__offer-price">${currentOffers.ObjOffers[0].price}</span>
+	</li>
 		</ul>
 		<button class="event__favorite-btn${isFavorite ? 'event__favorite-btn--active' : ''}" type="button">
 			<span class="visually-hidden">Add to favorite</span>
@@ -66,21 +66,23 @@ function wayPoint(point, destination, offers) {
 export default class WayPoint extends AbstractView {
   #destination = null;
   #point = null;
+  #offer = null;
   #offers = null;
   #ButClick = null;
   #Button = null;
-  constructor(point, destination, offers, OnEditClick) {
+  constructor(point, destination, offer, offers, OnEditCli) {
     super();
     this.#point = point;
     this.#destination = destination;
+    this.#offer = offer;
     this.#offers = offers;
-    this.#ButClick = OnEditClick;
+    this.#ButClick = OnEditCli;
     this.#Button = this.element.querySelector('.event__rollup-btn');
     this.#Button.addEventListener('click', this.#onClick);
   }
 
   get template() {
-    return wayPoint(this.#point, this.#destination, this.#offers);
+    return wayPoint(this.#point, this.#destination, this.#offer, this.#offers);
   }
 
   #onClick = (evt) => {

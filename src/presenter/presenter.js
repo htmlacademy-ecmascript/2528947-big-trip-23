@@ -26,11 +26,12 @@ export default class Presenter {
 
   #renderEvents() {
     const offers = this.pointModel.getOffers();
-    offers.forEach((offer) => this.#renderEvent(offer, offers));
+    offers.forEach((offer) => this.#renderEvent(offer));
   }
 
-  #renderEvent(offer, offers) {
+  #renderEvent() {
     const point = this.pointModel.getPoints();
+    const offers = this.pointModel.getOffers();
     const destination = this.pointModel.getDestination();
     const onEsc = (evt) => {
       if (evt.key === 'Escape') {
@@ -40,13 +41,13 @@ export default class Presenter {
     };
     const OnEditClick = () => swithToEditMode();
     const OnFormSubmit = () => swithToViewMode();
-    const eventView = new WayPoint({
-      point,
+    const eventView = new WayPoint(
+      point[0],
       destination,
-      OnEditClick: OnEditClick,
-    });
-    const eventEditView = new EditWayPoints(
       offers,
+      {OnEditClick: OnEditClick,
+      });
+    const eventEditView = new EditWayPoints(
       destination,
       point,
       {OnFormSubmit: OnFormSubmit,

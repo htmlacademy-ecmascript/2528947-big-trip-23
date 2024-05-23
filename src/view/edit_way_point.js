@@ -65,7 +65,6 @@ export default class EditWayPoints extends AbstractView {
     this.#offers = offers;
     this.#destination = destination;
     this.#point = point;
-
   }
 
   get template() {

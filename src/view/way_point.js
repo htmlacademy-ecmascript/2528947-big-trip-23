@@ -1,6 +1,7 @@
 import AbstractView from '../framework/view/abstract-view';
-function wayPoint(point, destinations) {
+function wayPoint(point, destination, offers) {
   const {type, isFavorite} = point;
+  const currentDestination = destination.find((des) => des.id === offers.ObjOffers.id);
   return `<li class="trip-events__item">
 	<div class="event">
 		<time class="event__date" datetime="2019-03-18">MAR 18</time>
@@ -13,7 +14,7 @@ function wayPoint(point, destinations) {
 				alt="Event type icon"
 			/>
 		</div>
-		<h3 class="event__title">${type} ${destinations[1].name}</h3>
+		<h3 class="event__title">${type} ${currentDestination}</h3>
 		<div class="event__schedule">
 			<p class="event__time">
 				<time class="event__start-time" datetime="2019-03-18T12:25"
@@ -27,7 +28,7 @@ function wayPoint(point, destinations) {
 			<p class="event__duration">01H 10M</p>
 		</div>
 		<p class="event__price">
-			&euro;&nbsp;<span class="event__price-value"></span>
+			&euro;&nbsp;<span class="event__price-value">${currentDestination}</span>
 		</p>
 		<h4 class="visually-hidden">Offers:</h4>
 		<ul class="event__selected-offers">
@@ -65,19 +66,21 @@ function wayPoint(point, destinations) {
 export default class WayPoint extends AbstractView {
   #destination = null;
   #point = null;
+  #offers = null;
   #ButClick = null;
   #Button = null;
-  constructor({point, destination, OnEditClick}) {
+  constructor(point, destination, offers, OnEditClick) {
     super();
     this.#point = point;
     this.#destination = destination;
+    this.#offers = offers;
     this.#ButClick = OnEditClick;
     this.#Button = this.element.querySelector('.event__rollup-btn');
     this.#Button.addEventListener('click', this.#onClick);
   }
 
   get template() {
-    return wayPoint(this.#point, this.#destination);
+    return wayPoint(this.#point, this.#destination, this.#offers);
   }
 
   #onClick = (evt) => {

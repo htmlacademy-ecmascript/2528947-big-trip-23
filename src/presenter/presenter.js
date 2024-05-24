@@ -38,14 +38,14 @@ export default class Presenter {
         switchToWayPoint();
       }
     };
-    const OnEditClick = () => swithToEditMode();
-    const OnFormSubmit = () => switchToWayPoint();
+    const OnEditClick = () => swithToEditWayPoint();
+    const OnFormWayPoint = () => switchToWayPoint();
     const wayPoint = new WayPoint(
       point,
       destination,
       offer,
       offers,
-      OnFormSubmit
+      OnFormWayPoint
     );
     const eventEditView = new EditWayPoints(
       offers,
@@ -54,7 +54,7 @@ export default class Presenter {
       point,
       OnEditClick,);
 
-    function swithToEditMode() {
+    function swithToEditWayPoint() {
       replace(wayPoint, eventEditView);
       document.addEventListener('keydown', onEsc);
     }

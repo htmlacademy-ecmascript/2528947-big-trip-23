@@ -8,7 +8,7 @@ const CreateEventTypeList = (off) =>
 </div>`;
 function editWayPoint(offers, offer, destination, point) {
   const currentPoint = point.find((poi) => poi.type === offer.type);
-  const {description} = destination;
+  const currentDestination = destination.find((des) => des.id === offer.ObjOffers[0].id);
   const MapEventTypeList = offers.map((off)=> CreateEventTypeList(off)).join('');
   const BoxPoint = destination.map((des)=> CreateBoxPoint(des)).join('');
   return `<section class="trip-events">
@@ -21,7 +21,7 @@ function editWayPoint(offers, offer, destination, point) {
 					<div class="event__type-wrapper">
 						<label class="event__type  event__type-btn" for="event-type-toggle-1">
 							<span class="visually-hidden">Choose event type</span>
-							<img class="event__type-icon" width="17" height="17" src="img/icons/${point.type}.png" alt="Event type icon">
+							<img class="event__type-icon" width="17" height="17" src="img/icons/${currentPoint.type}.png" alt="Event type icon">
 						</label>
 						<input class="event__type-toggle  visually-hidden" id="event-type-toggle-1" type="checkbox">
 
@@ -35,7 +35,8 @@ function editWayPoint(offers, offer, destination, point) {
 
 					<div class="event__field-group  event__field-group--destination">
 						<label class="event__label  event__type-output" for="event-destination-1">
-							${point.type}
+							${currentPoint.type}
+							${currentDestination.name}
 						</label>
 						<input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="" list="destination-list-1">
 						<datalist id="destination-list-1">
@@ -50,10 +51,10 @@ function editWayPoint(offers, offer, destination, point) {
 				<section class="event__details">
                   <section class="event__section  event__section--destination">
                     <h3 class="event__section-title  event__section-title--destination">Destination</h3>
-                    <p class="event__destination-description">${description}</p>
+                    <p class="event__destination-description">${currentDestination.description}</p>
 
                     <div class="event__photos-container">
-                      <div class="event__photos-tape">${destination[0].pictures.map((pic) =>`<img class="event__photo" src="${pic.src}" alt="${pic.description}"></img>`)}
+                      <div class="event__photos-tape">${currentDestination.pictures.map((pic) =>`<img class="event__photo" src="${pic.src}" alt="${pic.description}"></img>`)}
                       </div>
                     </div>
                   </section>

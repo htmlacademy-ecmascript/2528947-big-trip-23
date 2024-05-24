@@ -4,11 +4,6 @@ export const offers = [
     ObjOffers: [
       {
         id: '1',
-        title: 'VIP Place',
-        price: 30
-      },
-      {
-        id: '1',
         title: 'Taxi to the hotel',
         price: 40
       },

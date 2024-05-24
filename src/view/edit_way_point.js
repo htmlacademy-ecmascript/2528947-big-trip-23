@@ -1,18 +1,22 @@
 import AbstractView from '../framework/view/abstract-view';
 import ClassOffers from './Offers';
 const CreateBoxPoint = (des) => `<option value=${des.name}></option>`;
-const CreateEventTypeList = (offer) =>
+const CreateEventTypeList = (off) =>
   `<div class="event__type-item">
-<input id="event-type-${offer.type}-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value=${offer.type}>
-<label class="event__type-label  event__type-label--${offer.type}" for="event-type-${offer.type}-1">${offer.type}</label>
+<input id="event-type-${off.type}-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value=${off.type}>
+<label class="event__type-label  event__type-label--${off.type}" for="event-type-${off.type}-1">${off.type}</label>
 </div>`;
-function editWayPoint(offers, destination, point) {
-  const {description, pictures} = destination;
-  const MapEventTypeList = offers.map((offer)=> CreateEventTypeList(offer)).join('');
+function editWayPoint(offers, offer, destination, point) {
+  const currentPoint = point.find((poi) => poi.type === offer.type);
+  const {description} = destination;
+  const MapEventTypeList = offers.map((off)=> CreateEventTypeList(off)).join('');
   const BoxPoint = destination.map((des)=> CreateBoxPoint(des)).join('');
   return `<section class="trip-events">
 	<h2 class="visually-hidden">Trip events</h2>
 			<form class="event event--edit" action="#" method="post">
+			<button class="event__rollup-btn" type="button">
+                  <span class="visually-hidden">Open event</span>
+                </button>
 				<header class="event__header">
 					<div class="event__type-wrapper">
 						<label class="event__type  event__type-btn" for="event-type-toggle-1">
@@ -42,32 +46,34 @@ function editWayPoint(offers, destination, point) {
 					<button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
 					<button class="event__reset-btn" type="reset">${point.id ? 'Delete' : 'Cansel'}</button>
 				</header>
-				${new ClassOffers(offers, point).template}
+				${new ClassOffers(offers, currentPoint).template}
 				<section class="event__details">
                   <section class="event__section  event__section--destination">
                     <h3 class="event__section-title  event__section-title--destination">Destination</h3>
                     <p class="event__destination-description">${description}</p>
 
                     <div class="event__photos-container">
-                      <div class="event__photos-tape">${pictures.map((pic) =>`<img class="event__photo" src="${pic.src}" alt="${pic.description}"></img>`)}
+                      <div class="event__photos-tape">${destination[0].pictures.map((pic) =>`<img class="event__photo" src="${pic.src}" alt="${pic.description}"></img>`)}
                       </div>
                     </div>
                   </section>
 			</form>
-		</li>`;
+			</section>`;
 }
 export default class EditWayPoints extends AbstractView {
   #offers = null;
+  #offer = null;
   #destination = null;
   #point = null;
-  constructor(offers, destination, point) {
+  constructor(offers, offer, destination, point) {
     super();
     this.#offers = offers;
+    this.#offer = offer;
     this.#destination = destination;
     this.#point = point;
   }
 
   get template() {
-    return editWayPoint(this.#offers, this.#destination, this.#point);
+    return editWayPoint(this.#offers, this.#offer, this.#destination, this.#point);
   }
 }

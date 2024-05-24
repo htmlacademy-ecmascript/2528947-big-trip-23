@@ -35,37 +35,36 @@ export default class Presenter {
     const onEsc = (evt) => {
       if (evt.key === 'Escape') {
         evt.preventDefault();
-        switchToViewMode();
+        switchToWayPoint();
       }
     };
     const OnEditClick = () => swithToEditMode();
-    const OnFormSubmit = () => switchToViewMode();
-    const eventView = new WayPoint(
+    const OnFormSubmit = () => switchToWayPoint();
+    const wayPoint = new WayPoint(
       point,
       destination,
       offer,
       offers,
-      {
-        OnEditClick: OnEditClick,
-      });
+      OnFormSubmit
+    );
     const eventEditView = new EditWayPoints(
+      offers,
+      offer,
       destination,
       point,
-      {OnFormSubmit: OnFormSubmit,
-        OnFormCansel: OnFormSubmit,
-      });
+      OnEditClick,);
 
     function swithToEditMode() {
-      replace(eventView, eventEditView);
+      replace(wayPoint, eventEditView);
       document.addEventListener('keydown', onEsc);
     }
 
-    function switchToViewMode() {
-      replace(eventEditView, eventView);
+    function switchToWayPoint() {
+      replace(eventEditView, wayPoint);
       document.removeEventListener('keydown', onEsc);
     }
 
-    render(eventView, this.container);
+    render(wayPoint, this.container);
   }
 }
 

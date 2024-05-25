@@ -1,5 +1,5 @@
 import AbstractView from '../framework/view/abstract-view';
-import ClassOffers from './Offers';
+import ClassOffers from './offers';
 const CreateBoxPoint = (des) => `<option value=${des.name}></option>`;
 const CreateEventTypeList = (off) =>
   `<div class="event__type-item">
@@ -9,7 +9,7 @@ const CreateEventTypeList = (off) =>
 function editWayPoint(offers, offer, destination, point) {
   const currentPoint = point.find((poi) => poi.type === offer.type);
   const currentDestination = destination.find((des) => des.id === offer.ObjOffers[0].id);
-  const MapEventTypeList = offers.map((off)=> CreateEventTypeList(off)).join('');
+  const mapEventTypeList = offers.map((off)=> CreateEventTypeList(off)).join('');
   const BoxPoint = destination.map((des)=> CreateBoxPoint(des)).join('');
   return `<section class="trip-events">
 	<h2 class="visually-hidden">Trip events</h2>
@@ -28,7 +28,7 @@ function editWayPoint(offers, offer, destination, point) {
 						<div class="event__type-list">
 							<fieldset class="event__type-group">
 								<legend class="visually-hidden">Event type</legend>
-								${MapEventTypeList}
+								${mapEventTypeList}
 							</fieldset>
 						</div>
 					</div>
@@ -66,17 +66,17 @@ export default class EditWayPoints extends AbstractView {
   #offer = null;
   #destination = null;
   #point = null;
-  #Button = null;
-  #ButClick = null;
-  constructor(offers, offer, destination, point, OnEditClick) {
+  #button = null;
+  #butClick = null;
+  constructor(offers, offer, destination, point, onEditClick) {
     super();
     this.#offers = offers;
     this.#offer = offer;
     this.#destination = destination;
     this.#point = point;
-    this.#ButClick = OnEditClick;
-    this.#Button = this.element.querySelector('.event__rollup-btn');
-    this.#Button.addEventListener('click', this.#onClick);
+    this.#butClick = onEditClick;
+    this.#button = this.element.querySelector('.event__rollup-btn');
+    this.#button.addEventListener('click', this.#onClick);
   }
 
   get template() {
@@ -85,6 +85,6 @@ export default class EditWayPoints extends AbstractView {
 
   #onClick = (evt) => {
     evt.preventDefault();
-    this.#ButClick();
+    this.#butClick();
   };
 }

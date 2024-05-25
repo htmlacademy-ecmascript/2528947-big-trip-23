@@ -1,5 +1,5 @@
 import AbstractView from '../framework/view/abstract-view';
-import ClassOffers from './offers';
+import ClassOffers from './Offers';
 const CreateBoxPoint = (des) => `<option value=${des.name}></option>`;
 const CreateEventTypeList = (off) =>
   `<div class="event__type-item">

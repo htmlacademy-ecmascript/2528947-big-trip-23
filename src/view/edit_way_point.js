@@ -66,15 +66,25 @@ export default class EditWayPoints extends AbstractView {
   #offer = null;
   #destination = null;
   #point = null;
-  constructor(offers, offer, destination, point) {
+  #Button = null;
+  #ButClick = null;
+  constructor(offers, offer, destination, point, OnEditClick) {
     super();
     this.#offers = offers;
     this.#offer = offer;
     this.#destination = destination;
     this.#point = point;
+    this.#ButClick = OnEditClick;
+    this.#Button = this.element.querySelector('.event__rollup-btn');
+    this.#Button.addEventListener('click', this.#onClick);
   }
 
   get template() {
     return editWayPoint(this.#offers, this.#offer, this.#destination, this.#point);
   }
+
+  #onClick = (evt) => {
+    evt.preventDefault();
+    this.#ButClick();
+  };
 }

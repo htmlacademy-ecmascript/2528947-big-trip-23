@@ -32,14 +32,15 @@ export default class Presenter {
   #renderEvent(offer, offers) {
     const point = this.pointModel.getPoints();
     const destination = this.pointModel.getDestination();
+    const OnEditClick = () => swithToEditWayPoint();
+    const OnFormWayPoint = () => switchToWayPoint();
     const onEsc = (evt) => {
       if (evt.key === 'Escape') {
         evt.preventDefault();
         switchToWayPoint();
       }
     };
-    const OnEditClick = () => swithToEditWayPoint();
-    const OnFormWayPoint = () => switchToWayPoint();
+
     const wayPoint = new WayPoint(
       point,
       destination,
@@ -52,7 +53,7 @@ export default class Presenter {
       offer,
       destination,
       point,
-      OnEditClick,);
+      OnEditClick);
 
     function swithToEditWayPoint() {
       replace(wayPoint, eventEditView);

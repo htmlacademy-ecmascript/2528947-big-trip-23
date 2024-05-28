@@ -8,3 +8,4 @@ export const getDefoltPoint = () => ([{
   ObjOffers: [],
   type: POINT_TYPES[1],
 }]);
+

@@ -1,7 +1,7 @@
 export const Destinations = [
   {
     id: '1',
-    description: 'Chamonix, is a beautiful city, a true asian pearl, with crowded streets.',
+    description: 'sdhfjgfdfsagshdjfkfjdhdsgaesyttiuylgjchxgdfzsetrytfukjgngfdzsgsyrutkughn.',
     name: 'Moscow',
     pictures: [
       {
@@ -12,7 +12,7 @@ export const Destinations = [
   },
   {
     id: '2',
-    description: 'Chamonix, is a beautiful city, a true asian pearl, with crowded streets.',
+    description: 'dfghjjhgfdsdastytygiulkjhgrteyytiyiyuyjtrewresryuy.',
     name: 'New York',
     pictures: [
       {

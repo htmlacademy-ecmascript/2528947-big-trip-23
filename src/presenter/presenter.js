@@ -1,37 +1,72 @@
-import { render } from '../render.js';
-import DrawPoint from '../view/DrawPoint.js';
-import EditWayPoints from '../view/EditWayPoint.js';
-import WayPoint from '../view/WayPoint.js';
+import { render, replace } from '../framework/render.js';
+import DrawPoint from '../view/draw_point.js';
+import EditWayPoints from '../view/edit_way_point.js';
 import Filter from '../view/Filter.js';
-import { getDefoltPoint } from '../const.js';
-
+import WayPoint from '../view/way_point.js';
 export default class Presenter {
   boardComponent = new DrawPoint();
-  constructor({boardContainer, pointModel}) {
-    this.boardContainer = boardContainer;
+  constructor({container, pointModel}) {
+    this.container = container;
     this.pointModel = pointModel;
-    // this.destination = destination;
-  }
-
-  renderBoardComponent () {
-    render(this.boardComponent, this.boardContainer);
-  }
-
-  renderFilter () {
-    render(new Filter(), this.boardContainer);
   }
 
   init() {
-    const points = this.pointModel.getPoints();
-    const destinations = this.pointModel.getDestination();
+    this.#renderBoardComponent();
+    this.#renderFilter();
     const offers = this.pointModel.getOffers();
-    this.renderBoardComponent();
-    this.renderFilter();
-    render(new EditWayPoints(offers, destinations, points[1]), this.boardContainer);
-    render(new EditWayPoints(getDefoltPoint(), destinations, points[1]), this.boardContainer);
-    points.forEach((point) => {
-      render(new WayPoint(point, destinations), this.boardContainer);
-    });
+    this.#renderEvents(offers);
+  }
+
+  #renderBoardComponent() {
+    render(this.boardComponent, this.container);
+  }
+
+  #renderFilter() {
+    render(new Filter(), this.container);
+  }
+
+  #renderEvents(offers) {
+    offers.forEach((offer) => this.#renderEvent(offer, offers));
+  }
+
+  #renderEvent(offer, offers) {
+    const point = this.pointModel.getPoints();
+    const destination = this.pointModel.getDestination();
+    const onEditClick = () => swithToEditWayPoint();
+    const onFormWayPoint = () => switchToWayPoint();
+    const onEsc = (evt) => {
+      if (evt.key === 'Escape') {
+        evt.preventDefault();
+        switchToWayPoint();
+      }
+    };
+
+    const wayPoint = new WayPoint(
+      point,
+      destination,
+      offer,
+      offers,
+      onFormWayPoint
+    );
+    const eventEditView = new EditWayPoints(
+      offers,
+      offer,
+      destination,
+      point,
+      onEditClick);
+
+    function swithToEditWayPoint() {
+      replace(wayPoint, eventEditView);
+      document.addEventListener('keydown', onEsc);
+    }
+
+    function switchToWayPoint() {
+      replace(eventEditView, wayPoint);
+      document.removeEventListener('keydown', onEsc);
+    }
+
+    render(wayPoint, this.container);
   }
 }
+
 
